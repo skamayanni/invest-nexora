@@ -17,7 +17,7 @@ const STARTING_BALANCE = 5000;
 
 const DEMO_INVESTOR = {
 
-    email: "billionaire@gmail.com",
+    email: "billionaire1@gmail.com",
     password: "Billionaire2026!",
 
     firstName: "Alex",
@@ -37,63 +37,16 @@ const DEMO_INVESTOR = {
 
     holdings: [
 
-        {
-            symbol: "NVDA",
-            quantity: 1,
-            averagePrice: 100,
-            firstPurchaseDate: "2024-02-15T12:00:00.000Z"
-        },
+    // {symbol:"NVDA", quantity:3000, averagePrice:100, firstPurchaseDate:"2024-02-15T12:00:00.000Z"},
+    // {symbol:"MSFT", quantity:700, averagePrice:350, firstPurchaseDate:"2023-08-10T12:00:00.000Z"},
+    {symbol:"AAPL", quantity:1, averagePrice:180, firstPurchaseDate:"2023-11-20T12:00:00.000Z"},
+    {symbol:"AMZN", quantity:1, averagePrice:160, firstPurchaseDate:"2024-01-12T12:00:00.000Z"},
+    {symbol:"BTC", quantity:4, averagePrice:50000, firstPurchaseDate:"2023-06-18T12:00:00.000Z"},
+    {symbol:"ETH", quantity:50, averagePrice:2500, firstPurchaseDate:"2023-09-05T12:00:00.000Z"},
+    {symbol:"TSLA", quantity:50, averagePrice:200, firstPurchaseDate:"2024-03-22T12:00:00.000Z"},
+    {symbol:"WTI", quantity:15, averagePrice:70, firstPurchaseDate:"2024-04-10T12:00:00.000Z"}
+  ]
 
-        {
-            symbol: "MSFT",
-            quantity: 1,
-            averagePrice: 350,
-            firstPurchaseDate: "2023-08-10T12:00:00.000Z"
-        },
-
-        {
-            symbol: "AAPL",
-            quantity: 1,
-            averagePrice: 180,
-            firstPurchaseDate: "2023-11-20T12:00:00.000Z"
-        },
-
-        {
-            symbol: "AMZN",
-            quantity: 1,
-            averagePrice: 160,
-            firstPurchaseDate: "2024-01-12T12:00:00.000Z"
-        },
-
-        {
-            symbol: "BTC",
-            quantity: 1,
-            averagePrice: 50000,
-            firstPurchaseDate: "2023-06-18T12:00:00.000Z"
-        },
-
-        {
-            symbol: "ETH",
-            quantity: 1,
-            averagePrice: 2500,
-            firstPurchaseDate: "2023-09-05T12:00:00.000Z"
-        },
-
-        {
-            symbol: "TSLA",
-            quantity: 1,
-            averagePrice: 200,
-            firstPurchaseDate: "2024-03-22T12:00:00.000Z"
-        },
-
-        {
-            symbol: "WTI",
-            quantity: 1,
-            averagePrice: 70,
-            firstPurchaseDate: "2024-04-10T12:00:00.000Z"
-        }
-
-    ]
 
 };
 
@@ -249,8 +202,8 @@ function createIllustrativeTransactions(holdings) {
     holdings.forEach((holding, index) => {
 
         const assetNames = {
-            NVDA: "NVIDIA",
-            MSFT: "Microsoft",
+            // NVDA: "NVIDIA",
+            // MSFT: "Microsoft",
             AAPL: "Apple",
             AMZN: "Amazon",
             BTC: "Bitcoin",
