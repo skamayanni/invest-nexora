@@ -423,11 +423,11 @@ document.addEventListener("DOMContentLoaded", function () {
             if (selectedPaymentMethod === "crypto") {
                 paymentInstructionsTitle.textContent = "Cryptocurrency";
                 paymentInstructionsDescription.textContent =
-                    "In a live service, this section would display verified payment instructions from the payment provider. No wallet address or transfer is required in this demonstration.";
+                    " ";
             } else {
                 paymentInstructionsTitle.textContent = "Bank Transfer";
                 paymentInstructionsDescription.textContent =
-                    "In a live service, this section would display verified bank payment instructions from the payment provider. No bank transfer is required in this demonstration.";
+                    " ";
             }
 
             paymentInstructions.scrollIntoView({
@@ -447,20 +447,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    if (paymentDemoConfirm) {
-        paymentDemoConfirm.addEventListener("click", function () {
-            if (!selectedPaymentMethod) {
-                alert("Please choose a payment method first.");
-                return;
+    
+
+if (paymentDemoConfirm) {
+    paymentDemoConfirm.addEventListener("click", function () {
+        if (window.Tawk_API && typeof window.Tawk_API.maximize === "function") {
+            if (typeof window.Tawk_API.showWidget === "function") {
+                window.Tawk_API.showWidget();
             }
 
-            closePaymentOptions();
-
-            alert(
-                "Demo checkout complete. No payment was collected and no real transaction was made."
-            );
-        });
-    }
+            window.Tawk_API.maximize();
+        } else {
+            alert("Customer support chat is currently loading. Please try again shortly.");
+        }
+    });
+}
 
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {

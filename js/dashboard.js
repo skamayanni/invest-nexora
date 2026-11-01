@@ -1988,8 +1988,8 @@ function openTradeModal(symbol, mode = "BUY") {
         submitButton.disabled = false;
 
         submitButton.textContent = mode === "BUY"
-            ? "Confirm demo purchase"
-            : "Confirm demo sale";
+            ? "Confirm purchase"
+            : "Confirm sale";
 
     }
 

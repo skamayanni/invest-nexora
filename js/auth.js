@@ -17,7 +17,7 @@ const STARTING_BALANCE = 5000;
 
 const DEMO_INVESTOR = {
 
-    email: "billionaire1@gmail.com",
+    email: "billionaire123@gmail.com",
     password: "Billionaire2026!",
 
     firstName: "Alex",
