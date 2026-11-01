@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,12 +73,41 @@
 
                     </button>
 
+                    <!-- PRECONFIGURED DEMO ACCOUNT -->
+
+                    <!-- <div class="demo-login-card">
+
+                        <div class="demo-login-heading">
+                            <i class="fa-solid fa-chart-pie"></i>
+
+                            <div>
+                                <strong>Explore the demo investor account</strong>
+
+                                <p>
+                                    Open a preconfigured sample portfolio with illustrative
+                                    balances, holdings and transactions.
+                                </p>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-outline btn-block" id="useDemoAccountButton">
+
+                            Use demo credentials
+
+                        </button>
+
+                        <small>
+                            Simulation only. No real money or investments are involved.
+                        </small>
+
+                    </div> -->
                 </form>
 
 
                 <div class="auth-notice">
 
-                    <strong>SECURITY REMINDER:</strong> Never share passwords, private keys, recovery phrases or authentication codes
+                    <strong>SECURITY REMINDER:</strong> Never share passwords, private keys, recovery phrases or
+                    authentication codes
                     with anyone.
                 </div>
 
@@ -103,6 +131,29 @@
 
     </main>
 
+
+    <!-- Clicking Use demo credentials fills the login form. The user can then click the regular Log in button. -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const demoButton = document.getElementById(
+                "useDemoAccountButton"
+            );
+
+            if (!demoButton) return;
+
+            demoButton.addEventListener("click", () => {
+
+                document.getElementById("loginEmail").value =
+                    "investor@nexoracapital.demo";
+
+                document.getElementById("loginPassword").value =
+                    "NexoraDemo2026!";
+
+            });
+
+        });
+    </script>
 
     <script src="js/auth.js"></script>
 

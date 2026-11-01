@@ -721,7 +721,78 @@ function createIllustrativePortfolio() {
 }
 
 
+// function seedEmptyDemoAccountIfNeeded() {
+
+//     const portfolios = readDashboardStorage(
+//         DASHBOARD_PORTFOLIO_KEY,
+//         {}
+//     );
+
+//     const transactionsByUser = readDashboardStorage(
+//         DASHBOARD_TRANSACTION_KEY,
+//         {}
+//     );
+
+//     const existingPortfolio = portfolios[dashboardUser.id];
+
+//     const existingTransactions =
+//         transactionsByUser[dashboardUser.id] || [];
+
+//     /*
+//     Do not replace an existing account that has positions
+//     or transaction history.
+//     */
+
+//     const hasExistingHoldings =
+//         existingPortfolio &&
+//         Array.isArray(existingPortfolio.holdings) &&
+//         existingPortfolio.holdings.length > 0;
+
+//     const hasExistingTransactions =
+//         Array.isArray(existingTransactions) &&
+//         existingTransactions.length > 0;
+
+//     if (hasExistingHoldings || hasExistingTransactions) {
+//         return false;
+//     }
+
+//     /*
+//     If the account is empty, populate the demo portfolio.
+//     Existing empty accounts may receive this sample portfolio.
+//     */
+
+//     const sample = createIllustrativePortfolio();
+
+//     portfolios[dashboardUser.id] = sample.portfolio;
+
+//     transactionsByUser[dashboardUser.id] = sample.transactions;
+
+//     writeDashboardStorage(
+//         DASHBOARD_PORTFOLIO_KEY,
+//         portfolios
+//     );
+
+//     writeDashboardStorage(
+//         DASHBOARD_TRANSACTION_KEY,
+//         transactionsByUser
+//     );
+
+//     localStorage.setItem(
+//         `${NEXORA_DEMO_SEED_KEY}_${dashboardUser.id}`,
+//         "true"
+//     );
+
+//     return true;
+
+// }
+
 function seedEmptyDemoAccountIfNeeded() {
+
+    // Only the predefined investor account can receive
+    // the illustrative sample portfolio.
+    if (dashboardUser.accountType !== "preconfigured-demo") {
+        return false;
+    }
 
     const portfolios = readDashboardStorage(
         DASHBOARD_PORTFOLIO_KEY,
@@ -735,32 +806,17 @@ function seedEmptyDemoAccountIfNeeded() {
 
     const existingPortfolio = portfolios[dashboardUser.id];
 
-    const existingTransactions =
-        transactionsByUser[dashboardUser.id] || [];
-
-    /*
-    Do not replace an existing account that has positions
-    or transaction history.
-    */
-
-    const hasExistingHoldings =
+    // Do not overwrite an existing predefined portfolio.
+    if (
         existingPortfolio &&
         Array.isArray(existingPortfolio.holdings) &&
-        existingPortfolio.holdings.length > 0;
-
-    const hasExistingTransactions =
-        Array.isArray(existingTransactions) &&
-        existingTransactions.length > 0;
-
-    if (hasExistingHoldings || hasExistingTransactions) {
+        existingPortfolio.holdings.length > 0
+    ) {
         return false;
     }
 
-    /*
-    If the account is empty, populate the demo portfolio.
-    Existing empty accounts may receive this sample portfolio.
-    */
-
+    // Only seed the predefined investor if its portfolio
+    // has not already been initialized.
     const sample = createIllustrativePortfolio();
 
     portfolios[dashboardUser.id] = sample.portfolio;
@@ -783,7 +839,6 @@ function seedEmptyDemoAccountIfNeeded() {
     );
 
     return true;
-
 }
 
 
