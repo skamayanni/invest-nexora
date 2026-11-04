@@ -339,6 +339,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
         renderMarketsTable();
     };
+
+    // CONFIRM PURCHASE - CLOSE TRADE MODAL AND OPEN SUPPORT
+
+    const paymentDemoConfirm = document.getElementById("paymentDemoConfirm");
+    const tradeModal = document.getElementById("tradeModal");
+
+    if (paymentDemoConfirm) {
+
+        paymentDemoConfirm.addEventListener("click", function () {
+
+            // Close the entire trade modal
+            if (tradeModal) {
+
+                tradeModal.classList.remove("show", "active", "open");
+
+                tradeModal.setAttribute("aria-hidden", "true");
+
+            }
+
+            // Restore page scrolling
+            if (!document.querySelector(".trade-modal.show, .modal-overlay.open")) {
+
+                document.body.classList.remove("modal-open");
+
+            }
+
+            // Open Tawk.to customer support
+            if (window.Tawk_API && typeof window.Tawk_API.maximize === "function") {
+
+                if (typeof window.Tawk_API.showWidget === "function") {
+                    window.Tawk_API.showWidget();
+                }
+
+                window.Tawk_API.maximize();
+
+            } else {
+
+                alert("Customer support chat is still loading. Please try again shortly.");
+
+            }
+
+        });
+
+    }
 });
 
 
@@ -447,21 +491,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    
 
-if (paymentDemoConfirm) {
-    paymentDemoConfirm.addEventListener("click", function () {
-        if (window.Tawk_API && typeof window.Tawk_API.maximize === "function") {
-            if (typeof window.Tawk_API.showWidget === "function") {
-                window.Tawk_API.showWidget();
+
+    if (paymentDemoConfirm) {
+        paymentDemoConfirm.addEventListener("click", function () {
+            if (window.Tawk_API && typeof window.Tawk_API.maximize === "function") {
+                if (typeof window.Tawk_API.showWidget === "function") {
+                    window.Tawk_API.showWidget();
+                }
+
+                window.Tawk_API.maximize();
+            } else {
+                alert("Customer support chat is currently loading. Please try again shortly.");
             }
-
-            window.Tawk_API.maximize();
-        } else {
-            alert("Customer support chat is currently loading. Please try again shortly.");
-        }
-    });
-}
+        });
+    }
 
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
