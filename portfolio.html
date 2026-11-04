@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Nexora Capital</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        .portfolio-page {
+            width: 100%;
+        }
+
+        .portfolio-page .page-intro {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 8px 0 26px;
+        }
+
+        .portfolio-page .page-intro h2 {
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(25px, 3vw, 34px);
+            line-height: 1.2;
+            margin: 7px 0 8px;
+        }
+
+        .portfolio-page .page-intro p {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .portfolio-demo-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(50, 214, 160, .2);
+            border-radius: 12px;
+            background: rgba(50, 214, 160, .055);
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        .portfolio-demo-banner i {
+            color: var(--primary);
+            margin-top: 2px;
+        }
+
+        .portfolio-kpis {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .portfolio-kpi {
+            min-width: 0;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: var(--bg-card);
+        }
+
+        .portfolio-kpi .kpi-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 11px;
+        }
+
+        .portfolio-kpi .kpi-label i {
+            color: var(--primary);
+            font-size: 15px;
+        }
+
+        .portfolio-kpi h3 {
+            margin-top: 13px;
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(19px, 2vw, 25px);
+            overflow-wrap: anywhere;
+        }
+
+        .portfolio-kpi p {
+            color: var(--text-muted);
+            font-size: 10px;
+            margin-top: 5px;
+        }
+
+        .portfolio-content-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(280px, .8fr);
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-panel {
+            min-width: 0;
+            padding: 22px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: var(--bg-card);
+        }
+
+        .portfolio-panel-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .portfolio-panel-head h3 {
+            font-family: "Manrope", sans-serif;
+            font-size: 17px;
+        }
+
+        .portfolio-panel-head p {
+            color: var(--text-muted);
+            font-size: 11px;
+            margin-top: 4px;
+        }
+
+        .portfolio-tag {
+            padding: 5px 9px;
+            border-radius: 7px;
+            color: var(--primary);
+            background: rgba(50, 214, 160, .08);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: .6px;
+            white-space: nowrap;
+        }
+
+        .portfolio-chart-summary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-chart-summary span {
+            display: block;
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+
+        .portfolio-chart-summary strong {
+            display: block;
+            font-size: 17px;
+            margin-top: 4px;
+        }
+
+        .portfolio-chart-box {
+            height: 210px;
+            width: 100%;
+        }
+
+        .portfolio-chart-box svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .portfolio-chart-grid line {
+            stroke: rgba(255, 255, 255, .08);
+            stroke-dasharray: 4 5;
+        }
+
+        .portfolio-chart-labels {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-muted);
+            font-size: 10px;
+            margin-top: 8px;
+        }
+
+        .portfolio-donut-wrap {
+            display: grid;
+            place-items: center;
+            padding: 8px 0 16px;
+        }
+
+        .portfolio-page .allocation-donut {
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            position: relative;
+        }
+
+        .portfolio-page .allocation-donut::before {
+            content: "";
+            position: absolute;
+            inset: 23px;
+            border-radius: 50%;
+            background: var(--bg-card);
+        }
+
+        .portfolio-page .allocation-donut-center {
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 125px;
+            text-align: center;
+        }
+
+        .portfolio-page .allocation-donut-center span {
+            color: var(--text-muted);
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+
+        .portfolio-page .allocation-donut-center strong {
+            font-size: 15px;
+            overflow-wrap: anywhere;
+        }
+
+        .portfolio-holdings-panel {
+            margin-bottom: 20px;
+        }
+
+        .portfolio-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .portfolio-page .holdings-table {
+            min-width: 850px;
+            width: 100%;
+        }
+
+        .portfolio-page .holdings-table th,
+        .portfolio-page .holdings-table td {
+            white-space: nowrap;
+        }
+
+        .portfolio-section-note {
+            color: var(--text-muted);
+            font-size: 10px;
+            margin-top: 13px;
+            line-height: 1.6;
+        }
+
+        .portfolio-transactions {
+            margin-bottom: 24px;
+        }
+
+        .portfolio-transactions .data-table {
+            min-width: 650px;
+            width: 100%;
+        }
+
+        .portfolio-empty-state {
+            padding: 22px;
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 12px;
+        }
+
+        @media(max-width:1050px) {
+            .portfolio-kpis {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .portfolio-content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width:650px) {
+            .portfolio-page .page-intro {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .portfolio-kpis {
+                gap: 10px;
+            }
+
+            .portfolio-kpi {
+                padding: 15px;
+            }
+
+            .portfolio-panel {
+                padding: 16px;
+            }
+
+            .portfolio-chart-box {
+                height: 170px;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+            <a href="index.html" class="brand">
+                <span class="brand-icon"><i class="fa-solid fa-chart-line"></i></span>
+                <span>NEXORA<small>CAPITAL</small></span>
+            </a>
+
+            <div class="sidebar-label">WORKSPACE</div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-grip"></i><span>Overview</span>
+                </a>
+                <a href="markets.html">
+                    <i class="fa-solid fa-chart-simple"></i><span>Markets</span>
+                </a>
+                <a href="portfolio.html" class="active" aria-current="page">
+                    <i class="fa-solid fa-wallet"></i><span>My Portfolio</span>
+                </a>
+                <a href="transactions.html">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i><span>Transactions</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-demo-card">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <strong>Portfolio</strong>
+                    <p>Your assets are protected with industry-leading security measures.</p>
+                </div>
+                <button id="logoutButton" class="sidebar-logout" type="button">
+                    <i class="fa-solid fa-right-from-bracket"></i> Log out
+                </button>
+            </div>
+        </aside>
+
+        <main class="dashboard-main portfolio-page">
+            <header class="dashboard-topbar">
+                <div>
+                    <p class="topbar-eyebrow">NEXORA CAPITAL / WORKSPACE</p>
+                    <h1>My Portfolio</h1>
+                    <p id="dashboardDate" class="dashboard-date"></p>
+                </div>
+                <div class="topbar-user">
+                    <div class="topbar-user-info">
+                        <strong id="topbarUserName">User</strong>
+                        <span>Live account</span>
+                    </div>
+                    <div id="userAvatar" class="user-avatar">DU</div>
+                </div>
+            </header>
+
+            <section class="page-intro">
+                <div>
+                    <p class="section-eyebrow">PORTFOLIO MANAGEMENT</p>
+                    <h2>Investment summary</h2>
+                    <p>Review your cash balance, asset positions and recorded activity.</p>
+                </div>
+                <a href="markets.html" class="btn btn-primary">
+                    Explore markets <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </section>
+
+            <div class="portfolio-demo-banner" role="note">
+                <i class="fa-solid fa-circle-info"></i>
+                <span><strong>Account Notice:</strong>This is a live investment account. Portfolio balances, market
+                    prices, asset valuations, and transaction records reflect the account's recorded activity and are
+                    subject to market fluctuations, transaction processing, and applicable brokerage reporting.
+                    Investment values may rise or fall, and past performance does not guarantee future returns.
+                </span>
+            </div>
+
+            <section class="portfolio-kpis" aria-label="Portfolio summary">
+                <article class="portfolio-kpi">
+                    <div class="kpi-label">Total portfolio value <i class="fa-solid fa-chart-pie"></i></div>
+                    <h3 id="totalPortfolioValue">$0.00</h3>
+                    <p>Cash plus holdings</p>
+                </article>
+                <article class="portfolio-kpi">
+                    <div class="kpi-label">Available cash <i class="fa-solid fa-wallet"></i></div>
+                    <h3 id="availableCash">$0.00</h3>
+                    <p>Uninvested balance</p>
+                </article>
+                <article class="portfolio-kpi">
+                    <div class="kpi-label">Invested value <i class="fa-solid fa-layer-group"></i></div>
+                    <h3 id="investedValue">$0.00</h3>
+                    <p>Current holding values</p>
+                </article>
+                <article class="portfolio-kpi">
+                    <div class="kpi-label">Unrealized P/L <i class="fa-solid fa-arrow-trend-up"></i></div>
+                    <h3 id="totalProfitLoss">$0.00</h3>
+                    <p id="profitLossNote">No open positions</p>
+                </article>
+            </section>
+
+            <!-- <section class="portfolio-content-grid">
+                <article class="portfolio-panel">
+                    <div class="portfolio-panel-head">
+                        <div>
+                            <h3>Portfolio snapshot</h3>
+                            <p>Illustrative visual summary, not a historical performance chart.</p>
+                        </div>
+                        <span class="portfolio-tag">DEMO DATA</span>
+                    </div>
+                    <div class="portfolio-chart-summary">
+                        <div>
+                            <span>Current portfolio value</span>
+                            <strong id="chartPortfolioValue">$0.00</strong>
+                        </div>
+                        <div>
+                            <span>Open positions</span>
+                            <strong id="openPositionsCount">0 assets</strong>
+                        </div>
+                    </div>
+                    <div class="portfolio-chart-box">
+                        <svg id="portfolioChart" viewBox="0 0 700 240" preserveAspectRatio="none" role="img"
+                            aria-label="Illustrative portfolio snapshot chart">
+                            <defs>
+                                <linearGradient id="overviewChartGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#32d6a0" stop-opacity=".28" />
+                                    <stop offset="100%" stop-color="#32d6a0" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <g class="portfolio-chart-grid">
+                                <line x1="0" y1="35" x2="700" y2="35" />
+                                <line x1="0" y1="90" x2="700" y2="90" />
+                                <line x1="0" y1="145" x2="700" y2="145" />
+                                <line x1="0" y1="200" x2="700" y2="200" />
+                            </g>
+                            <path id="portfolioChartArea" d="" fill="url(#overviewChartGradient)"></path>
+                            <path id="portfolioChartLine" d="" fill="none" stroke="#32d6a0" stroke-width="3"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                    <div class="portfolio-chart-labels"><span>Illustrative period start</span><span>Current
+                            snapshot</span></div>
+                </article>
+
+                <article class="portfolio-panel">
+                    <div class="portfolio-panel-head">
+                        <div>
+                            <h3>Asset allocation</h3>
+                            <p>Distribution of current simulated holdings.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-donut-wrap">
+                        <div id="allocationDonut" class="allocation-donut" role="img"
+                            aria-label="Asset allocation chart">
+                            <div class="allocation-donut-center">
+                                <span>INVESTED</span>
+                                <strong id="allocationTotal">$0.00</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="allocationLegend" class="allocation-legend">
+                        <p class="allocation-empty">Loading allocation…</p>
+                    </div>
+                </article>
+            </section> -->
+
+            <section class="portfolio-panel portfolio-holdings-panel">
+                <div class="portfolio-panel-head">
+                    <div>
+                        <p class="section-eyebrow">YOUR POSITIONS</p>
+                        <h3>Investment holdings</h3>
+                        <p>Quantities, recorded purchase dates, average costs and returns.</p>
+                    </div>
+                    <span class="portfolio-tag">LIVE</span>
+                </div>
+
+                <div class="holdings-summary">
+                    <div><span>Assets held</span><strong id="holdingsAssetCount">0</strong></div>
+                    <div><span>Total cost basis</span><strong id="holdingsCostBasis">$0.00</strong></div>
+                    <div><span>Current value</span><strong id="holdingsCurrentValue">$0.00</strong></div>
+                    <div><span>Unrealized P/L</span><strong id="holdingsProfitLoss">$0.00</strong></div>
+                </div>
+
+                <div class="portfolio-table-wrap">
+                    <table class="holdings-table">
+                        <thead>
+                            <tr>
+                                <th>Investment</th>
+                                <th>Quantity</th>
+                                <th>Purchase date</th>
+                                <th>Holding period</th>
+                                <th>Average cost</th>
+                                <th>Current value</th>
+                                <th>Unrealized P/L</th>
+                            </tr>
+                        </thead>
+                        <tbody id="investmentHoldingsBody">
+                            <tr>
+                                <td colspan="7" class="portfolio-empty-state">Loading portfolio holdings…</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="portfolio-section-note">All amounts and returns on this page are generated by the local
+                    application and should not be interpreted as investment advice.</p>
+            </section>
+
+            <!-- <section class="portfolio-panel portfolio-transactions" id="transactions">
+                <article class="portfolio-panel">
+                    <div class="portfolio-panel-head">
+                        <div>
+                            <h3>Portfolio snapshot</h3>
+                            <p>Illustrative visual summary, not a historical performance chart.</p>
+                        </div>
+                        <span class="portfolio-tag">DEMO DATA</span>
+                    </div>
+                    <div class="portfolio-chart-summary">
+                        <div>
+                            <span>Current portfolio value</span>
+                            <strong id="chartPortfolioValue">$0.00</strong>
+                        </div>
+                        <div>
+                            <span>Open positions</span>
+                            <strong id="openPositionsCount">0 assets</strong>
+                        </div>
+                    </div>
+                    <div class="portfolio-chart-box">
+                        <svg id="portfolioChart" viewBox="0 0 700 240" preserveAspectRatio="none" role="img"
+                            aria-label="Illustrative portfolio snapshot chart">
+                            <defs>
+                                <linearGradient id="overviewChartGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#32d6a0" stop-opacity=".28" />
+                                    <stop offset="100%" stop-color="#32d6a0" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <g class="portfolio-chart-grid">
+                                <line x1="0" y1="35" x2="700" y2="35" />
+                                <line x1="0" y1="90" x2="700" y2="90" />
+                                <line x1="0" y1="145" x2="700" y2="145" />
+                                <line x1="0" y1="200" x2="700" y2="200" />
+                            </g>
+                            <path id="portfolioChartArea" d="" fill="url(#overviewChartGradient)"></path>
+                            <path id="portfolioChartLine" d="" fill="none" stroke="#32d6a0" stroke-width="3"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </div>
+                    <div class="portfolio-chart-labels"><span>Illustrative period start</span><span>Current
+                            snapshot</span></div>
+                </article>
+            </section> -->
+
+            <footer class="dashboard-footer">
+                <p>&copy; <span id="currentYear"></span> Nexora Capital. </p>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Keep the same script order used by dashboard.html. -->
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>
