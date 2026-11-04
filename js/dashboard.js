@@ -631,7 +631,7 @@ function createIllustrativePortfolio() {
 
         transactions.push({
 
-            id: `demo-buy-${position.symbol}`,
+            id: `buy-${position.symbol}`,
             type: "BUY",
             symbol: position.symbol,
             name: asset.name,
@@ -641,7 +641,7 @@ function createIllustrativePortfolio() {
             date: monthsAgo(position.monthsHeld),
             simulated: true,
             illustrative: true,
-            description: "Illustrative opening position"
+            description: "Opening position"
 
         });
 
@@ -1083,7 +1083,7 @@ function renderDashboardMarkets() {
 
         container.innerHTML = `
             <p class="allocation-empty">
-                Market demo data is currently unavailable.
+                Market data is currently unavailable.
             </p>
         `;
 
@@ -1309,7 +1309,7 @@ function renderInvestmentHoldings() {
 
             <tr>
                 <td colspan="7" class="holdings-empty">
-                    No open demo positions are available.
+                    No open positions are available.
                 </td>
             </tr>
 
@@ -1522,7 +1522,7 @@ function renderAssetAllocation() {
 
         legend.innerHTML = `
             <p class="allocation-empty">
-                No open demo positions.
+                No open positions.
             </p>
         `;
 
@@ -1631,7 +1631,7 @@ function renderRecentTransactions() {
 
             <tr>
                 <td colspan="4">
-                    No demo transactions yet.
+                    No transactions yet.
                 </td>
             </tr>
 
@@ -1930,8 +1930,8 @@ function openTradeModal(symbol, mode = "BUY") {
     if (title) {
 
         title.textContent = mode === "BUY"
-            ? "Buy demo asset"
-            : "Sell demo asset";
+            ? "Buy asset"
+            : "Sell asset";
 
     }
 
@@ -2078,7 +2078,7 @@ function executeDemoBuy(asset, quantity) {
     if (total > dashboardPortfolio.cashBalance + 0.000001) {
 
         throw new Error(
-            "Insufficient demo cash for this simulated purchase."
+            "Insufficient cash for this purchase."
         );
 
     }
@@ -2148,7 +2148,7 @@ function executeDemoSell(asset, quantity) {
     if (!holding || holding.quantity <= 0) {
 
         throw new Error(
-            "You do not have a demo position in this asset."
+            "You do not have a position in this asset."
         );
 
     }
@@ -2156,7 +2156,7 @@ function executeDemoSell(asset, quantity) {
     if (quantity > holding.quantity + 0.000000001) {
 
         throw new Error(
-            "You cannot sell more units than your demo holding."
+            "You cannot sell more units than your holding."
         );
 
     }
@@ -2268,8 +2268,8 @@ function handleDemoTrade(event) {
 
         message.textContent =
             selectedTradeMode === "BUY"
-                ? "Simulated purchase completed."
-                : "Simulated sale completed.";
+                ? "Purchase completed."
+                : "Sale completed.";
 
         message.style.color = "#32d6a0";
 
@@ -2298,7 +2298,7 @@ function handleDemoTrade(event) {
     } catch (error) {
 
         message.textContent =
-            error.message || "Unable to process demo order.";
+            error.message || "Unable to process order.";
 
         message.style.color = "#ff7185";
 

@@ -5247,3 +5247,95 @@ body {
         margin-left: 0;
     }
 }
+
+/* =====================================
+   DASHBOARD DEPOSIT AND WITHDRAW BUTTONS
+===================================== */
+
+.sidebar-action {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    margin-top: 8px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: transparent;
+    color: #aab6c8;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.sidebar-action i {
+    width: 19px;
+    font-size: 16px;
+}
+
+.deposit-sidebar-btn:hover {
+    color: #32d6a0;
+    background: rgba(50, 214, 160, 0.09);
+    border-color: rgba(50, 214, 160, 0.2);
+}
+
+.withdraw-sidebar-btn:hover {
+    color: #60a5fa;
+    background: rgba(96, 165, 250, 0.09);
+    border-color: rgba(96, 165, 250, 0.2);
+}
+
+#depositForm label {
+    display: block;
+    margin-bottom: 12px;
+}
+
+/* =====================================
+   DEPOSIT PAYMENT MODAL — SOLID BACKGROUND
+===================================== */
+
+/* Darken the background behind the modal */
+#depositPaymentModal {
+    background: rgba(2, 7, 18, 0.88) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Make the payment modal completely opaque */
+#depositPaymentModal .payment-options-card {
+    background: #0d192b !important;
+    background-color: #0d192b !important;
+    opacity: 1 !important;
+    border: 1px solid #26364c;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.55);
+}
+
+/* Give the payment summary its own solid background */
+#depositPaymentModal .payment-order-summary {
+    background: #142136 !important;
+}
+
+/* Payment method cards */
+#depositPaymentModal .payment-method-option {
+    background: #142136 !important;
+    border: 1px solid #26364c;
+}
+
+/* Payment instructions */
+#depositPaymentModal .payment-instructions {
+    background: #101f32 !important;
+    border: 1px solid #26364c;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+/* Keep the text clearly visible */
+#depositPaymentModal,
+#depositPaymentModal h2,
+#depositPaymentModal h3,
+#depositPaymentModal strong {
+    color: #f5f7fb;
+}

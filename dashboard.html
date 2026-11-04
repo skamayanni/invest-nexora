@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 
-    
+
 </head>
 
 <body class="dashboard-body">
@@ -65,6 +65,16 @@
                     <i class="fa-solid fa-arrow-right-arrow-left"></i>
                     <span>Transactions</span>
                 </a>
+
+                <button type="button" class="sidebar-action deposit-sidebar-btn" id="openDeposit">
+                    <i class="fa-solid fa-circle-plus"></i>
+                    <span>Deposit</span>
+                </button>
+
+                <button type="button" class="sidebar-action withdraw-sidebar-btn" id="openWithdraw">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                    <span>Withdraw</span>
+                </button>
 
             </nav>
 
@@ -751,6 +761,162 @@
 
             </footer>
 
+            <!-- DEPOSIT AMOUNT MODAL -->
+            <div class="trade-modal" id="depositModal" role="dialog" aria-modal="true"
+                aria-labelledby="depositModalTitle" aria-hidden="true">
+
+                <div class="trade-modal-content">
+
+                    <div class="trade-modal-heading">
+                        <div>
+                            <p class="section-eyebrow">ACCOUNT FUNDING</p>
+                            <h3 id="depositModalTitle">Deposit Funds</h3>
+                        </div>
+
+                        <button type="button" class="modal-close" id="depositClose">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <form id="depositForm">
+
+                        <label for="depositAmount">Amount (USD)</label>
+
+                        <input type="number" id="depositAmount" min="1" max="100000000" step="0.01"
+                            placeholder="Enter deposit amount" required>
+
+                        <div class="trade-calculation">
+                            <div>
+                                <span>Deposit amount</span>
+                                <strong id="depositEstimatedAmount">$0.00</strong>
+                            </div>
+                        </div>
+
+                        <p id="depositMessage" class="auth-message" aria-live="polite"></p>
+
+                        <p class="trade-demo-disclaimer">
+                            You will be prompted to select your preferred payment method before proceeding to Customer
+                            Support,
+                            where your funds credit request will be processed.
+
+                        </p>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            Continue
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+
+            <!-- DEPOSIT PAYMENT METHOD MODAL -->
+            <div class="modal-overlay" id="depositPaymentModal" aria-hidden="true">
+
+                <div class="modal-card payment-options-card">
+
+                    <button type="button" class="modal-close" id="depositPaymentClose">
+                        &times;
+                    </button>
+
+                    <div class="payment-modal-header">
+
+                        <span class="payment-icon">↗</span>
+
+                        <p class="market-data-label">DEMO CHECKOUT</p>
+
+                        <h2>Choose Payment Method</h2>
+
+                        <p>
+                            Select a payment method for your deposit.
+                        </p>
+
+                    </div>
+
+                    <div class="payment-order-summary">
+
+                        <div>
+                            <span>Transaction</span>
+                            <strong>Account Deposit</strong>
+                        </div>
+
+                        <div>
+                            <span>Deposit amount</span>
+                            <strong id="depositPaymentAmount">$0.00</strong>
+                        </div>
+
+                        <div>
+                            <span>Transaction type</span>
+                            <strong>Deposit</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="payment-method-list">
+
+                        <button type="button" class="payment-method-option" data-deposit-method="crypto">
+
+                            <span class="payment-method-icon crypto-payment-icon">
+                                ₿
+                            </span>
+
+                            <span class="payment-method-text">
+                                <strong>Cryptocurrency</strong>
+                                <small>View crypto payment information</small>
+                            </span>
+
+                            <span class="payment-method-arrow">›</span>
+
+                        </button>
+
+                        <button type="button" class="payment-method-option" data-deposit-method="bank">
+
+                            <span class="payment-method-icon bank-payment-icon">
+                                ▤
+                            </span>
+
+                            <span class="payment-method-text">
+                                <strong>Bank Transfer</strong>
+                                <small>View bank transfer information</small>
+                            </span>
+
+                            <span class="payment-method-arrow">›</span>
+
+                        </button>
+
+                    </div>
+
+                    <div class="payment-instructions" id="depositPaymentInstructions" hidden>
+
+                        <h3 id="depositInstructionsTitle"></h3>
+
+                        <p id="depositInstructionsDescription"></p>
+
+                        <div class="payment-demo-notice">
+
+                            <strong>Live mode</strong>
+                    <p>
+                        Your deposit request is being generated, kindly contact Customer Support to complete purchase.
+                    </p>
+
+                        </div>
+
+                        <button type="button" class="btn btn-primary payment-demo-confirm" id="depositSupportButton">
+
+                            Contact Customer Support
+
+                        </button>
+
+                    </div>
+
+                    <p class="payment-demo-footer">
+                        Live checkout only · Real-Time transactions
+                    </p>
+
+                </div>
+
+            </div>
         </main>
 
     </div>
@@ -760,6 +926,7 @@
     <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
     <script src="js/dashboard.js"></script>
+    <script src="js/dashboard-deposit.js"></script>
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">

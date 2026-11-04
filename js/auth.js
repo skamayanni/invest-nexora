@@ -7,7 +7,7 @@ const SESSION_KEY = "nexora_current_user";
 const PORTFOLIO_KEY = "nexora_portfolios";
 const TRANSACTIONS_KEY = "nexora_transactions";
 
-const STARTING_BALANCE = 5000;
+const STARTING_BALANCE = 1000;
 /* =====================================
    PRECONFIGURED DEMO INVESTOR
 ===================================== */
