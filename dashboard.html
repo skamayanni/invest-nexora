@@ -824,7 +824,7 @@
 
                         <span class="payment-icon">↗</span>
 
-                        <p class="market-data-label">DEMO CHECKOUT</p>
+                        <p class="market-data-label"> CHECKOUT</p>
 
                         <h2>Choose Payment Method</h2>
 
@@ -896,9 +896,10 @@
                         <div class="payment-demo-notice">
 
                             <strong>Live mode</strong>
-                    <p>
-                        Your deposit request is being generated, kindly contact Customer Support to complete purchase.
-                    </p>
+                            <p>
+                                Your deposit request is being generated, kindly contact Customer Support to complete
+                                purchase.
+                            </p>
 
                         </div>
 
@@ -943,6 +944,28 @@
         document.addEventListener("contextmenu", event => event.preventDefault());
     </script>
     <!--End of Tawk.to Script-->
+
+    <!-- Withdrawal Notice Modal -->
+    <div id="withdrawalNotice" class="notice-overlay">
+        <div class="notice-box">
+
+            <div class="notice-icon">!</div>
+
+            <h2>Withdrawal Notice</h2>
+
+            <p>
+                Please note that withdrawal requests can only be processed
+                on the designated OFFICIAL WITHDRAWAL DATE.
+                You will be able to access your funds once the scheduled
+                withdrawal period begins.
+            </p>
+
+            <button onclick="closeWithdrawalNotice()">OK, UNDERSTOOD</button>
+
+        </div>
+    </div>
+
+
 </body>
 
 </html>

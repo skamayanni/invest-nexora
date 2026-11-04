@@ -38,35 +38,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function openModal(modal) {
 
-    if (modal.classList.contains("trade-modal")) {
-        modal.classList.add("show");
+        if (modal.classList.contains("trade-modal")) {
+            modal.classList.add("show");
+        }
+
+        if (modal.classList.contains("modal-overlay")) {
+            modal.classList.add("open");
+        }
+
+        modal.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("modal-open");
+
     }
-
-    if (modal.classList.contains("modal-overlay")) {
-        modal.classList.add("open");
-    }
-
-    modal.setAttribute("aria-hidden", "false");
-
-    document.body.classList.add("modal-open");
-
-}
 
     function closeModal(modal) {
 
-    modal.classList.remove("show", "active", "open");
+        modal.classList.remove("show", "active", "open");
 
-    modal.setAttribute("aria-hidden", "true");
+        modal.setAttribute("aria-hidden", "true");
 
-    if (
-        !document.querySelector(
-            ".trade-modal.show, .modal-overlay.open"
-        )
-    ) {
-        document.body.classList.remove("modal-open");
+        if (
+            !document.querySelector(
+                ".trade-modal.show, .modal-overlay.open"
+            )
+        ) {
+            document.body.classList.remove("modal-open");
+        }
+
     }
-
-}
 
     // OPEN DEPOSIT
 
@@ -88,17 +88,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
+
     // WITHDRAWAL NOTICE
 
-    if (openWithdraw) {
+    const withdrawalNotice = document.getElementById("withdrawalNotice");
+
+    if (openWithdraw && withdrawalNotice) {
 
         openWithdraw.addEventListener("click", function () {
-
-            alert("Withdrawals are unavailable in this demo environment.");
-
+            withdrawalNotice.style.display = "flex";
+            document.body.classList.add("modal-open");
         });
 
     }
+
+    window.closeWithdrawalNotice = function () {
+
+        if (withdrawalNotice) {
+            withdrawalNotice.style.display = "none";
+            document.body.classList.remove("modal-open");
+        }
+
+    };
 
     // UPDATE DEPOSIT AMOUNT
 
@@ -229,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
     // ESCAPE KEY
 
     document.addEventListener("keydown", function (event) {
@@ -237,6 +250,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             closeModal(depositModal);
             closeModal(depositPaymentModal);
+
+            if (withdrawalNotice) {
+                withdrawalNotice.style.display = "none";
+                document.body.classList.remove("modal-open");
+            }
 
         }
 
