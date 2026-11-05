@@ -2793,6 +2793,11 @@ img {
     background: rgba(50, 214, 160, 0.1);
 }
 
+.badge-credit {
+    color: #32d6a0;
+    background: rgba(50, 214, 160, 0.1);
+}
+
 .badge-sell {
     color: #ffb0bc;
     background: rgba(255, 113, 133, 0.1);
@@ -5425,4 +5430,123 @@ body {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
+}
+
+/*--------------------------------------------------------------
+# Starter Section Section
+--------------------------------------------------------------*/
+.starter-section {
+    /* Add your styles here */
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #25D366;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.whatsapp-float img {
+    width: 28px;
+    height: 28px;
+}
+
+#menu-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.menu-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    transition: transform .2s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+}
+
+.menu-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.menu-card-content {
+    padding: 15px;
+}
+
+.menu-card-content h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.menu-card-content p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.menu-price {
+    font-weight: bold;
+    color: #000;
+}
+
+#menu-filters {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#menu-filters button {
+    padding: 8px 16px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all .2s;
+}
+
+#menu-filters button:hover {
+    background: #ff7a00;
+    color: white;
+    border-color: #ff7a00;
+}
+
+.menu-category {
+    margin-top: 50px;
+}
+
+.menu-category h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+}
+
+.menu-category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
 }

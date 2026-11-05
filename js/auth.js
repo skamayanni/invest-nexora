@@ -17,19 +17,19 @@ const STARTING_BALANCE = 1000;
 
 const DEMO_INVESTOR = {
 
-    email: "billionaire123@gmail.com",
-    password: "Billionaire2026!",
+    email: "killian.gold.trading@contractor.net",
+    password: "MilitaryLife2005",
 
-    firstName: "Alex",
-    lastName: "Morgan",
+    firstName: "Killian",
+    lastName: "Robinson",
 
     // =================================
     // ACCOUNT BALANCE CONFIGURATION
     // =================================
 
-    cashBalance: 350000,
-    
-    
+    cashBalance: 800000,
+
+
 
     // =================================
     // ILLUSTRATIVE INVESTMENT HOLDINGS
@@ -37,15 +37,15 @@ const DEMO_INVESTOR = {
 
     holdings: [
 
-    // {symbol:"NVDA", quantity:3000, averagePrice:100, firstPurchaseDate:"2024-02-15T12:00:00.000Z"},
-    // {symbol:"MSFT", quantity:700, averagePrice:350, firstPurchaseDate:"2023-08-10T12:00:00.000Z"},
-    {symbol:"AAPL", quantity:1, averagePrice:180, firstPurchaseDate:"2023-11-20T12:00:00.000Z"},
-    {symbol:"AMZN", quantity:1, averagePrice:160, firstPurchaseDate:"2024-01-12T12:00:00.000Z"},
-    {symbol:"BTC", quantity:4, averagePrice:50000, firstPurchaseDate:"2023-06-18T12:00:00.000Z"},
-    {symbol:"ETH", quantity:50, averagePrice:2500, firstPurchaseDate:"2023-09-05T12:00:00.000Z"},
-    {symbol:"TSLA", quantity:50, averagePrice:200, firstPurchaseDate:"2024-03-22T12:00:00.000Z"},
-    {symbol:"WTI", quantity:15, averagePrice:70, firstPurchaseDate:"2024-04-10T12:00:00.000Z"}
-  ]
+        // {symbol:"NVDA", quantity:3000, averagePrice:100, firstPurchaseDate:"2024-02-15T12:00:00.000Z"},
+        // {symbol:"MSFT", quantity:700, averagePrice:350, firstPurchaseDate:"2023-08-10T12:00:00.000Z"},
+        { symbol: "AAPL", quantity: 1000, averagePrice: 180, firstPurchaseDate: "2025-03-19T12:00:00.000Z" },
+        { symbol: "AMZN", quantity: 1000, averagePrice: 160, firstPurchaseDate: "2025-09-02T12:00:00.000Z" },
+        { symbol: "BTC", quantity: 15, averagePrice: 50000, firstPurchaseDate: "2024-01-25T12:00:00.000Z" },
+        { symbol: "ETH", quantity: 260, averagePrice: 2500, firstPurchaseDate: "2024-07-02T12:00:00.000Z" },
+        { symbol: "TSLA", quantity: 300, averagePrice: 200, firstPurchaseDate: "2026-04-29T12:00:00.000Z" }
+        // {symbol:"WTI", quantity:90, averagePrice:70, firstPurchaseDate:"2024-04-10T12:00:00.000Z"}
+    ]
 
 
 };
@@ -165,101 +165,191 @@ function initializePreconfiguredInvestor(user) {
     const portfolios = getStoredJSON(PORTFOLIO_KEY, {});
     const transactions = getStoredJSON(TRANSACTIONS_KEY, {});
 
-    // Only seed the account when it has no saved portfolio.
-    // This prevents ordinary logins from resetting balances.
-    if (portfolios[user.id]) {
-        return;
+    // Only initialize the portfolio if it does not already exist.
+    if (!portfolios[user.id]) {
+
+        const holdings = DEMO_INVESTOR.holdings.map(holding => ({
+            ...holding
+        }));
+
+        portfolios[user.id] = {
+
+            cashBalance: DEMO_INVESTOR.cashBalance,
+
+            holdings,
+
+            currency: "USD",
+
+            createdAt: new Date().toISOString(),
+
+            demoPortfolio: true
+
+        };
+
     }
 
-    const holdings = DEMO_INVESTOR.holdings.map(holding => ({
-        ...holding
-    }));
+    // Get existing transaction history.
+    const existingTransactions = Array.isArray(transactions[user.id])
+        ? transactions[user.id]
+        : [];
 
-    const portfolio = {
-        cashBalance: DEMO_INVESTOR.cashBalance,
-        holdings,
-        currency: "USD",
-        createdAt: new Date().toISOString(),
-        demoPortfolio: true
-    };
+    // Preserve transactions created through simulated user activity.
+    const existingUserTransactions = existingTransactions.filter(
+        transaction => transaction.illustrative !== true
+    );
 
-    portfolios[user.id] = portfolio;
+    // Load the latest editable illustrative transaction list.
+    const updatedIllustrativeTransactions =
+        createIllustrativeTransactions();
 
-    transactions[user.id] = createIllustrativeTransactions(holdings);
+    // Combine the illustrative records with existing simulated activity.
+    transactions[user.id] = [
+        ...existingUserTransactions,
+        ...updatedIllustrativeTransactions
+    ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // Save both storage objects.
     setStoredJSON(PORTFOLIO_KEY, portfolios);
+
     setStoredJSON(TRANSACTIONS_KEY, transactions);
+
 }
 
 /* =====================================
    ILLUSTRATIVE TRANSACTION HISTORY
 ===================================== */
 
-function createIllustrativeTransactions(holdings) {
+/* =====================================
+   PREDEFINED DEMO TRANSACTION HISTORY
+===================================== */
 
-    const transactions = [];
+// Edit this list to control the Recent Transactions
+// displayed for the predefined demonstration account.
+//
+// All entries are illustrative sample records.
+// They do not change portfolio balances or holdings.
 
-    holdings.forEach((holding, index) => {
+const PREDEFINED_DEMO_TRANSACTIONS = [
 
-        const assetNames = {
-            // NVDA: "NVIDIA",
-            // MSFT: "Microsoft",
-            AAPL: "Apple",
-            AMZN: "Amazon",
-            BTC: "Bitcoin",
-            ETH: "Ethereum",
-            TSLA: "Tesla",
-            WTI: "WTI Crude Oil"
+    // {
+    //     id: "demo-tx-001",
+    //     asset: "Amazon",
+    //     symbol: "AMZN",
+    //     type: "SELL",
+    //     amount: 89600,
+    //     date: "2026-05-02",
+    //     realizedProfit: 9600,
+    //     description: "Illustrative sale"
+    // },
+
+
+    {
+        id: "demo-tx-001",
+        asset: "Amazon",
+        symbol: "AMZN",
+        type: "BUY",
+        amount: 68000,
+        date: "2026-04-29",
+        description: "Asset purchase"
+    },
+
+    {
+        id: "demo-tx-002",
+        asset: "Tesla",
+        symbol: "TSLA",
+        type: "BUY",
+        amount: 500000,
+        date: "2025-09-02",
+        description: "Asset purchase"
+    },
+
+    {
+        id: "demo-tx-003",
+        asset: "Apple",
+        symbol: "AAPL",
+        type: "BUY",
+        amount: 200000,
+        date: "2025-03-19",
+        description: "Asset purchase"
+    },
+
+    {
+        id: "demo-tx-004",
+        asset: "Bitcoin",
+        symbol: "WITHDRAWAL",
+        type: "SELL",
+        amount: 150000,
+        date: "2024-11-29",
+        realizedProfit: 208460,
+        description: " "
+    },
+
+    {
+        id: "demo-tx-005",
+        asset: "Bitcoin",
+        symbol: "BTC",
+        type: "BUY",
+        amount: 780000,
+        date: "2024-01-25",
+        description: "Asset purchase"
+    },
+
+    {
+        id: "demo-tx-006",
+        asset: "Bitcoin",
+        symbol: "DEPOSIT",
+        type: "BUY",
+        amount: 1500000,
+        date: "2024-01-25",
+        realizedProfit: 45000,
+        description: " "
+    }
+
+];
+
+
+// Convert the editable configuration into the format
+// expected by the existing dashboard.
+
+function createIllustrativeTransactions() {
+
+    return PREDEFINED_DEMO_TRANSACTIONS.map(transaction => {
+
+        const amount = Number(transaction.amount);
+        const date = new Date(
+            `${transaction.date}T12:00:00.000Z`
+        );
+
+        return {
+
+            id: transaction.id,
+
+            type: transaction.type.toUpperCase(),
+
+            symbol: transaction.symbol,
+
+            name: transaction.asset,
+
+            total: amount,
+
+            date: date.toISOString(),
+
+            realizedProfit:
+                transaction.realizedProfit === undefined
+                    ? undefined
+                    : Number(transaction.realizedProfit),
+
+            simulated: true,
+
+            illustrative: true,
+
+            description:
+                transaction.description || "Illustrative activity"
+
         };
 
-        const total = holding.quantity * holding.averagePrice;
+    }).sort((a, b) => new Date(b.date) - new Date(a.date));
 
-        const purchaseDate = new Date(holding.firstPurchaseDate);
-
-        transactions.push({
-            id: `demo-buy-${holding.symbol}`,
-            type: "BUY",
-            symbol: holding.symbol,
-            name: assetNames[holding.symbol] || holding.symbol,
-            quantity: holding.quantity,
-            price: holding.averagePrice,
-            total,
-            date: purchaseDate.toISOString(),
-            simulated: true,
-            illustrative: true
-        });
-
-        // Illustrative partial-sale and reinvestment examples.
-        // These entries are educational sample activity, not verified trades.
-        if (index < 3) {
-
-            const saleQuantity = holding.quantity * 0.05;
-            const saleTotal = saleQuantity * holding.averagePrice * 1.12;
-
-            const saleDate = new Date(purchaseDate);
-            saleDate.setMonth(saleDate.getMonth() + 8);
-
-            transactions.push({
-                id: `demo-sell-${holding.symbol}`,
-                type: "SELL",
-                symbol: holding.symbol,
-                name: assetNames[holding.symbol] || holding.symbol,
-                quantity: saleQuantity,
-                price: holding.averagePrice * 1.12,
-                total: saleTotal,
-                costBasisSold: saleQuantity * holding.averagePrice,
-                realizedProfit: saleTotal -
-                    saleQuantity * holding.averagePrice,
-                date: saleDate.toISOString(),
-                simulated: true,
-                illustrative: true
-            });
-        }
-    });
-
-    return transactions.sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-    );
 }
 
 
