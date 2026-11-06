@@ -33,8 +33,8 @@ const NEXORA_MARKETS = [
     {
         symbol: "XAU",
         name: "Gold",
-        category: "metals",
-        price: 2500,
+        category: "commodities",
+        price: 4065.47,
         change: 0.85,
         icon: "fa-solid fa-coins",
         iconClass: "gold"
@@ -44,7 +44,7 @@ const NEXORA_MARKETS = [
         symbol: "MRNA",
         name: "Moderna",
         category: "stocks",
-        price: 55,
+        price: 241.46,
         change: 0.65,
         icon: "fa-solid fa-dna",
         iconClass: "moderna"

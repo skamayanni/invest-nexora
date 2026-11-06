@@ -194,7 +194,7 @@ function initializePreconfiguredInvestor(user) {
     const portfolios = getStoredJSON(PORTFOLIO_KEY, {});
     const transactions = getStoredJSON(TRANSACTIONS_KEY, {});
 
-    const DEMO_PORTFOLIO_VERSION = 9;
+    const DEMO_PORTFOLIO_VERSION = 99;
 
     const portfolioVersionKey =
         `nexora_demo_portfolio_version_${user.id}`;
@@ -500,7 +500,7 @@ async function handleRegistration(event) {
         form.querySelector('button[type="submit"]');
 
     submitButton.disabled = true;
-    submitButton.textContent = "Creating demo account...";
+    submitButton.textContent = "Creating account...";
 
 
     try {
@@ -533,7 +533,7 @@ async function handleRegistration(event) {
         setCurrentUser(user);
 
         showAuthMessage(
-            "Your demo account has been created.",
+            "Your account has been created.",
             "success"
         );
 
@@ -546,7 +546,7 @@ async function handleRegistration(event) {
         console.error(error);
 
         showAuthMessage(
-            error.message || "Unable to create the demo account."
+            error.message || "Unable to create the account."
         );
 
     } finally {
@@ -554,7 +554,7 @@ async function handleRegistration(event) {
         submitButton.disabled = false;
 
         submitButton.innerHTML =
-            'Create demo account <i class="fa-solid fa-arrow-right"></i>';
+            'Create account <i class="fa-solid fa-arrow-right"></i>';
 
     }
 
@@ -598,7 +598,7 @@ async function handlePreconfiguredDemoLogin(event) {
     );
 
     submitButton.disabled = true;
-    submitButton.textContent = "Opening demo portfolio...";
+    submitButton.textContent = "Opening portfolio...";
 
     try {
 
@@ -638,7 +638,7 @@ async function handlePreconfiguredDemoLogin(event) {
         console.error(error);
 
         showAuthMessage(
-            error.message || "Unable to open the demo portfolio."
+            error.message || "Unable to open the portfolio."
         );
 
         submitButton.disabled = false;
