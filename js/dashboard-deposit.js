@@ -216,26 +216,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // OPEN TAWK.TO CUSTOMER SUPPORT
 
+    // if (supportButton) {
+
+    //     supportButton.addEventListener("click", function () {
+
+    //         if (
+    //             window.Tawk_API &&
+    //             typeof window.Tawk_API.maximize === "function"
+    //         ) {
+
+    //             if (typeof window.Tawk_API.showWidget === "function") {
+    //                 window.Tawk_API.showWidget();
+    //             }
+
+    //             window.Tawk_API.maximize();
+
+    //         } else {
+
+    //             alert("Customer support chat is still loading. Please try again shortly.");
+
+    //         }
+
+    //     });
+
+    // }
+
+    // OPEN WHATSAPP CUSTOMER SUPPORT
+
     if (supportButton) {
 
         supportButton.addEventListener("click", function () {
 
-            if (
-                window.Tawk_API &&
-                typeof window.Tawk_API.maximize === "function"
-            ) {
+            const whatsappNumber = "19703084124";
 
-                if (typeof window.Tawk_API.showWidget === "function") {
-                    window.Tawk_API.showWidget();
-                }
+            const message = encodeURIComponent(
+                "Hello, I would like to speak to a customer support representative regarding my deposit."
+            );
 
-                window.Tawk_API.maximize();
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
 
-            } else {
-
-                alert("Customer support chat is still loading. Please try again shortly.");
-
-            }
+            window.open(whatsappURL, "_blank", "noopener,noreferrer");
 
         });
 

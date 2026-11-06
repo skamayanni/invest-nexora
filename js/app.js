@@ -45,3 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+// WHATSAPP CUSTOMER SUPPORT
+const WHATSAPP_SUPPORT_URL =
+    "https://wa.me/19703084124?text=" +
+    encodeURIComponent("Hello, I would like to speak to a customer support representative.");
+
+function openWhatsAppSupport() {
+    window.open(WHATSAPP_SUPPORT_URL, "_blank", "noopener,noreferrer");
+}

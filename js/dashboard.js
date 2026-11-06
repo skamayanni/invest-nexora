@@ -30,6 +30,25 @@ const NEXORA_DEMO_SEED_KEY = "nexora_demo_seeded_v1";
 // These are illustrative demo prices, NOT live quotations.
 
 const NEXORA_MARKETS = [
+    {
+        symbol: "XAU",
+        name: "Gold",
+        category: "metals",
+        price: 2500,
+        change: 0.85,
+        icon: "fa-solid fa-coins",
+        iconClass: "gold"
+    },
+
+    {
+        symbol: "MRNA",
+        name: "Moderna",
+        category: "stocks",
+        price: 55,
+        change: 0.65,
+        icon: "fa-solid fa-dna",
+        iconClass: "moderna"
+    },
 
     {
         symbol: "NVDA",
@@ -1067,10 +1086,10 @@ function renderDashboardMarkets() {
     }
 
     const featuredSymbols = [
+        "XAU",
+        "MRNA",
         "NVDA",
         "MSFT",
-        "BTC",
-        "TSLA",
         "AAPL",
         "AMZN"
     ];

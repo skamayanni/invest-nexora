@@ -35,16 +35,45 @@ const DEMO_INVESTOR = {
     // ILLUSTRATIVE INVESTMENT HOLDINGS
     // =================================
 
+
+
     holdings: [
 
-        // {symbol:"NVDA", quantity:3000, averagePrice:100, firstPurchaseDate:"2024-02-15T12:00:00.000Z"},
-        // {symbol:"MSFT", quantity:700, averagePrice:350, firstPurchaseDate:"2023-08-10T12:00:00.000Z"},
-        { symbol: "AAPL", quantity: 1000, averagePrice: 180, firstPurchaseDate: "2025-03-19T12:00:00.000Z" },
-        { symbol: "AMZN", quantity: 1000, averagePrice: 160, firstPurchaseDate: "2025-09-02T12:00:00.000Z" },
-        { symbol: "BTC", quantity: 15, averagePrice: 50000, firstPurchaseDate: "2024-01-25T12:00:00.000Z" },
-        { symbol: "ETH", quantity: 260, averagePrice: 2500, firstPurchaseDate: "2024-07-02T12:00:00.000Z" },
-        { symbol: "TSLA", quantity: 300, averagePrice: 200, firstPurchaseDate: "2026-04-29T12:00:00.000Z" }
-        // {symbol:"WTI", quantity:90, averagePrice:70, firstPurchaseDate:"2024-04-10T12:00:00.000Z"}
+        {
+            symbol: "XAU",
+            quantity: 540,
+            averagePrice: 1900,
+            firstPurchaseDate: "2024-01-26T12:00:00.000Z"
+        },
+
+        {
+            symbol: "MRNA",
+            quantity: 8272.72727273,
+            averagePrice: 45,
+            firstPurchaseDate: "2024-02-20T12:00:00.000Z"
+        },
+
+        {
+            symbol: "AAPL",
+            quantity: 1000,
+            averagePrice: 180,
+            firstPurchaseDate: "2025-03-19T12:00:00.000Z"
+        },
+
+        {
+            symbol: "AMZN",
+            quantity: 1000,
+            averagePrice: 160,
+            firstPurchaseDate: "2025-09-02T12:00:00.000Z"
+        },
+
+        {
+            symbol: "TSLA",
+            quantity: 300,
+            averagePrice: 200,
+            firstPurchaseDate: "2026-04-29T12:00:00.000Z"
+        }
+
     ]
 
 
@@ -165,50 +194,73 @@ function initializePreconfiguredInvestor(user) {
     const portfolios = getStoredJSON(PORTFOLIO_KEY, {});
     const transactions = getStoredJSON(TRANSACTIONS_KEY, {});
 
-    // Only initialize the portfolio if it does not already exist.
+    const DEMO_PORTFOLIO_VERSION = 9;
+
+    const portfolioVersionKey =
+        `nexora_demo_portfolio_version_${user.id}`;
+
+    // Initialize or update the predefined portfolio.
+
     if (!portfolios[user.id]) {
 
-        const holdings = DEMO_INVESTOR.holdings.map(holding => ({
-            ...holding
-        }));
-
         portfolios[user.id] = {
-
             cashBalance: DEMO_INVESTOR.cashBalance,
 
-            holdings,
+            holdings: DEMO_INVESTOR.holdings.map(holding => ({
+                ...holding
+            })),
 
             currency: "USD",
-
             createdAt: new Date().toISOString(),
-
             demoPortfolio: true
-
         };
+
+        localStorage.setItem(
+            portfolioVersionKey,
+            String(DEMO_PORTFOLIO_VERSION)
+        );
+
+    } else if (
+        localStorage.getItem(portfolioVersionKey) !==
+        String(DEMO_PORTFOLIO_VERSION)
+    ) {
+
+        // Update predefined holdings while preserving cash.
+
+        portfolios[user.id].holdings =
+            DEMO_INVESTOR.holdings.map(holding => ({
+                ...holding
+            }));
+
+        localStorage.setItem(
+            portfolioVersionKey,
+            String(DEMO_PORTFOLIO_VERSION)
+        );
 
     }
 
-    // Get existing transaction history.
+    // Preserve existing non-illustrative transactions.
+
     const existingTransactions = Array.isArray(transactions[user.id])
         ? transactions[user.id]
         : [];
 
-    // Preserve transactions created through simulated user activity.
     const existingUserTransactions = existingTransactions.filter(
         transaction => transaction.illustrative !== true
     );
 
-    // Load the latest editable illustrative transaction list.
+    // Generate the latest illustrative transaction history.
+
     const updatedIllustrativeTransactions =
         createIllustrativeTransactions();
 
-    // Combine the illustrative records with existing simulated activity.
     transactions[user.id] = [
         ...existingUserTransactions,
         ...updatedIllustrativeTransactions
     ].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // Save both storage objects.
+    // Save portfolio and transactions.
+
     setStoredJSON(PORTFOLIO_KEY, portfolios);
 
     setStoredJSON(TRANSACTIONS_KEY, transactions);
@@ -231,25 +283,13 @@ function initializePreconfiguredInvestor(user) {
 
 const PREDEFINED_DEMO_TRANSACTIONS = [
 
-    // {
-    //     id: "demo-tx-001",
-    //     asset: "Amazon",
-    //     symbol: "AMZN",
-    //     type: "SELL",
-    //     amount: 89600,
-    //     date: "2026-05-02",
-    //     realizedProfit: 9600,
-    //     description: "Illustrative sale"
-    // },
-
-
     {
         id: "demo-tx-001",
-        asset: "Amazon",
-        symbol: "AMZN",
+        asset: "Crude Oil",
+        symbol: "WTI",
         type: "BUY",
-        amount: 68000,
-        date: "2026-04-29",
+        amount: 328618,
+        date: "2025-09-02",
         description: "Asset purchase"
     },
 
@@ -258,19 +298,19 @@ const PREDEFINED_DEMO_TRANSACTIONS = [
         asset: "Tesla",
         symbol: "TSLA",
         type: "BUY",
-        amount: 500000,
-        date: "2025-09-02",
-        description: "Asset purchase"
+        amount: 475500,
+        date: "2025-03-19",
+        description: "Stock purchase"
     },
 
     {
         id: "demo-tx-003",
-        asset: "Apple",
-        symbol: "AAPL",
+        asset: "Moderna",
+        symbol: "MRNA",
         type: "BUY",
-        amount: 200000,
-        date: "2025-03-19",
-        description: "Asset purchase"
+        amount: 45000,
+        date: "2024-02-20",
+        description: "Stock purchase"
     },
 
     {
@@ -286,12 +326,12 @@ const PREDEFINED_DEMO_TRANSACTIONS = [
 
     {
         id: "demo-tx-005",
-        asset: "Bitcoin",
-        symbol: "BTC",
+        asset: "Gold",
+        symbol: "XAU",
         type: "BUY",
-        amount: 780000,
-        date: "2024-01-25",
-        description: "Asset purchase"
+        amount: 570000,
+        date: "2024-01-26",
+        description: "Gold purchase"
     },
 
     {

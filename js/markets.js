@@ -491,19 +491,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // if (paymentDemoConfirm) {
+    //     paymentDemoConfirm.addEventListener("click", function () {
+    //         if (window.Tawk_API && typeof window.Tawk_API.maximize === "function") {
+    //             if (typeof window.Tawk_API.showWidget === "function") {
+    //                 window.Tawk_API.showWidget();
+    //             }
 
+    //             window.Tawk_API.maximize();
+    //         } else {
+    //             alert("Customer support chat is currently loading. Please try again shortly.");
+    //         }
+    //     });
+    // }
 
     if (paymentDemoConfirm) {
         paymentDemoConfirm.addEventListener("click", function () {
-            if (window.Tawk_API && typeof window.Tawk_API.maximize === "function") {
-                if (typeof window.Tawk_API.showWidget === "function") {
-                    window.Tawk_API.showWidget();
-                }
-
-                window.Tawk_API.maximize();
-            } else {
-                alert("Customer support chat is currently loading. Please try again shortly.");
-            }
+            openWhatsAppSupport();
         });
     }
 

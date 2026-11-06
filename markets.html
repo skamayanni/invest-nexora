@@ -24,6 +24,14 @@
 <body class="dashboard-body">
 
     <div class="dashboard-layout">
+        <!-- MOBILE MENU BUTTON -->
+        <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" type="button" aria-label="Open navigation menu"
+            aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- MOBILE MENU OVERLAY -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
         <!-- SIDEBAR -->
         <aside class="sidebar">
@@ -117,28 +125,6 @@
                 </div>
 
             </header>
-
-
-            <!-- DEMO NOTICE -->
-            <div class="demo-banner">
-
-                <span class="demo-banner-icon">
-                    <i class="fa-solid fa-circle-info"></i>
-                </span>
-
-                <div>
-                    <strong>Market data</strong>
-
-                    <p>
-                        Cryptocurrency, company shares, oil, natural gas, gasoline,
-                        and diesel are among the financial instruments and commodities that may be available for trading
-                        or investment, subject to applicable market conditions, account eligibility, and platform terms.
-                    </p>
-                </div>
-
-                <span class="demo-status">LIVE</span>
-
-            </div>
 
 
             <!-- MARKET INTRO -->
@@ -367,14 +353,14 @@
 
                 <div>
 
-                    <!-- <p>
+                    <p>
                         <strong>
-                            All transactions and account balances are subject to
-                            verification and market fluctuations. No
-                            investment advice is provided.
+                            Prices are subject to market fluctuations and applicable brokerage reporting.
+                        Investment values may rise or fall, and past performance does not guarantee future
+                        returns.
                         </strong>
 
-                    </p> -->
+                    </p>
                 </div>
 
             </section>
@@ -610,6 +596,60 @@
         document.addEventListener("contextmenu", event => event.preventDefault());
     </script> -->
     <!--End of Tawk.to Script-->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuButton = document.getElementById("mobileSidebarToggle");
+            const sidebar = document.querySelector(".sidebar");
+            const overlay = document.getElementById("sidebarOverlay");
+
+            if (!menuButton || !sidebar || !overlay) return;
+
+            function openSidebar() {
+                sidebar.classList.add("mobile-open");
+                overlay.classList.add("active");
+                document.body.classList.add("sidebar-open");
+
+                menuButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                menuButton.setAttribute("aria-expanded", "true");
+                menuButton.setAttribute("aria-label", "Close navigation menu");
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove("mobile-open");
+                overlay.classList.remove("active");
+                document.body.classList.remove("sidebar-open");
+
+                menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                menuButton.setAttribute("aria-expanded", "false");
+                menuButton.setAttribute("aria-label", "Open navigation menu");
+            }
+
+            menuButton.addEventListener("click", function () {
+                if (sidebar.classList.contains("mobile-open")) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+
+            overlay.addEventListener("click", closeSidebar);
+
+            sidebar.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", closeSidebar);
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") closeSidebar();
+            });
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 768) closeSidebar();
+            });
+
+        });
+    </script>
 </body>
 
 </html>

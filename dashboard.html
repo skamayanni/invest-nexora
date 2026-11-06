@@ -25,6 +25,14 @@
 <body class="dashboard-body">
 
     <div class="dashboard-layout">
+        <!-- MOBILE MENU BUTTON -->
+        <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" type="button" aria-label="Open navigation menu"
+            aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- MOBILE MENU OVERLAY -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
         <!-- SIDEBAR -->
         <aside class="sidebar">
@@ -113,11 +121,11 @@
 
                 <div>
 
-                    <p class="topbar-eyebrow">
-                        NEXORA CAPITAL / WORKSPACE
-                    </p>
+                    <h3 class="topbar-eyebrow">
+                        <strong>ACCOUNT OVERVIEW / WORKSPACE</strong>
+                    </h3>
 
-                    <h1>Account Overview</h1>
+                    <!-- <h1>Account Overview</h1> -->
 
                     <p id="dashboardDate" class="dashboard-date"></p>
 
@@ -145,7 +153,7 @@
 
 
             <!-- DEMO NOTICE -->
-            <div class="overview-demo-notice">
+            <!-- <div class="overview-demo-notice">
 
                 <i class="fa-solid fa-circle-info"></i>
 
@@ -155,7 +163,7 @@
                     opportunities.
                 </span>
 
-            </div>
+            </div> -->
 
 
             <!-- WELCOME -->
@@ -163,13 +171,15 @@
 
                 <div>
 
-                    <p class="section-eyebrow">
+                    <!-- <p class="section-eyebrow">
                         YOUR FINANCIAL OVERVIEW
-                    </p>
+                    </p> -->
 
                     <h2>
-                        Welcome back,
-                        <span id="welcomeName">Investor</span>.
+                        <strong>
+                            Welcome back,
+                            <span id="welcomeName">Investor</span>.
+                        </strong>
                     </h2>
 
                     <p>
@@ -178,13 +188,13 @@
 
                 </div>
 
-                <a href="markets.html" class="btn btn-primary">
+                <!-- <a href="markets.html" class="btn btn-primary">
 
                     Explore markets
 
                     <i class="fa-solid fa-arrow-right"></i>
 
-                </a>
+                </a> -->
 
             </section>
 
@@ -962,18 +972,70 @@
             <h2>Withdrawal Notice</h2>
 
             <p>
-                Please note that withdrawal requests can only be processed
-                on the designated OFFICIAL WITHDRAWAL DATE.
-                You will be able to access your funds once the scheduled
-                withdrawal period begins.
+                To complete your withdrawal, please contact our Customer Care Department for guidance. All withdrawal
+                requests must be submitted through the official support
+                channel for processing.
             </p>
 
-            <button onclick="closeWithdrawalNotice()">OK, UNDERSTOOD</button>
+            <button onclick="closeWithdrawalNotice()" class="payment-demo-confirm"
+                id="depositSupportButton">OK, UNDERSTOOD</button>
 
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
 
+            const menuButton = document.getElementById("mobileSidebarToggle");
+            const sidebar = document.querySelector(".sidebar");
+            const overlay = document.getElementById("sidebarOverlay");
+
+            if (!menuButton || !sidebar || !overlay) return;
+
+            function openSidebar() {
+                sidebar.classList.add("mobile-open");
+                overlay.classList.add("active");
+                document.body.classList.add("sidebar-open");
+
+                menuButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                menuButton.setAttribute("aria-expanded", "true");
+                menuButton.setAttribute("aria-label", "Close navigation menu");
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove("mobile-open");
+                overlay.classList.remove("active");
+                document.body.classList.remove("sidebar-open");
+
+                menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                menuButton.setAttribute("aria-expanded", "false");
+                menuButton.setAttribute("aria-label", "Open navigation menu");
+            }
+
+            menuButton.addEventListener("click", function () {
+                if (sidebar.classList.contains("mobile-open")) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+
+            overlay.addEventListener("click", closeSidebar);
+
+            sidebar.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", closeSidebar);
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") closeSidebar();
+            });
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 768) closeSidebar();
+            });
+
+        });
+    </script>
 </body>
 
 </html>

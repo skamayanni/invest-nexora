@@ -304,11 +304,244 @@
                 height: 170px;
             }
         }
+
+
+        /* PERSONAL INFORMATION */
+
+        .personal-info-panel {
+            margin-bottom: 22px;
+        }
+
+        .personal-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .personal-info-item {
+            min-width: 0;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .personal-info-item span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .personal-info-item span i {
+            color: var(--primary);
+        }
+
+        .personal-info-item strong {
+            display: block;
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 850px) {
+            .personal-info-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 500px) {
+            .personal-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =====================================
+   EDIT PROFILE MODAL
+===================================== */
+
+        .personal-info-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .personal-info-actions .btn {
+            padding: 9px 13px;
+            font-size: 11px;
+        }
+
+        .profile-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, .75);
+            backdrop-filter: blur(5px);
+        }
+
+        .profile-modal-overlay.active {
+            display: flex;
+        }
+
+        .profile-modal {
+            width: 100%;
+            max-width: 620px;
+            max-height: 90vh;
+            overflow-y: auto;
+
+            padding: 26px;
+
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+
+            box-shadow: 0 20px 70px rgba(0, 0, 0, .4);
+        }
+
+        .profile-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+
+            margin-bottom: 25px;
+        }
+
+        .profile-modal-header h2 {
+            font-family: "Manrope", sans-serif;
+            font-size: 21px;
+            margin: 7px 0;
+        }
+
+        .profile-modal-header p:last-child {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .profile-close {
+            width: 36px;
+            height: 36px;
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            background: transparent;
+            color: var(--text);
+
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .profile-form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .profile-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .profile-form-group label {
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .profile-form-group input {
+            width: 100%;
+            min-width: 0;
+
+            padding: 12px;
+
+            color: var(--text);
+            background: var(--bg);
+
+            border: 1px solid var(--border);
+            border-radius: 9px;
+
+            outline: none;
+            font: inherit;
+            font-size: 12px;
+        }
+
+        .profile-form-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .profile-form-group input[readonly] {
+            opacity: .65;
+            cursor: not-allowed;
+        }
+
+        .profile-form-group small {
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+
+        .profile-form-message {
+            min-height: 18px;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+
+        .profile-modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+
+            margin-top: 20px;
+            padding-top: 18px;
+
+            border-top: 1px solid var(--border);
+        }
+
+        @media(max-width: 550px) {
+
+            .profile-form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-modal {
+                padding: 19px;
+            }
+
+            .profile-modal-actions {
+                flex-direction: column-reverse;
+            }
+
+            .profile-modal-actions button {
+                width: 100%;
+            }
+
+        }
     </style>
 </head>
 
 <body class="dashboard-body">
     <div class="dashboard-layout">
+        <!-- MOBILE MENU BUTTON -->
+        <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" type="button" aria-label="Open navigation menu"
+            aria-expanded="false">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- MOBILE MENU OVERLAY -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
         <aside class="sidebar">
             <a href="index.html" class="brand">
@@ -348,7 +581,7 @@
         <main class="dashboard-main portfolio-page">
             <header class="dashboard-topbar">
                 <div>
-                    <p class="topbar-eyebrow">NEXORA CAPITAL / WORKSPACE</p>
+                    <p class="topbar-eyebrow">PORTFOLIO MANAGEMENT / WORKSPACE</p>
                     <h1>My Portfolio</h1>
                     <p id="dashboardDate" class="dashboard-date"></p>
                 </div>
@@ -361,22 +594,20 @@
                 </div>
             </header>
 
-            <section class="page-intro">
-                <div>
-                    <p class="section-eyebrow">PORTFOLIO MANAGEMENT</p>
-                    <h2>Investment summary</h2>
-                    <p>Review your cash balance, asset positions and recorded activity.</p>
-                </div>
-                <a href="markets.html" class="btn btn-primary">
+            <!-- <section class="page-intro"> -->
+                <!-- <div> -->
+                    <!-- <p class="section-eyebrow">PORTFOLIO MANAGEMENT</p> -->
+                    <!-- <h2>Investment summary</h2> -->
+                    <!-- <p>Review your cash balance, asset positions and recorded activity.</p> -->
+                <!-- </div> -->
+                <!-- <a href="markets.html" class="btn btn-primary">
                     Explore markets <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </section>
+                </a> -->
+            <!-- </section> -->
 
             <div class="portfolio-demo-banner" role="note">
                 <i class="fa-solid fa-circle-info"></i>
-                <span><strong> Prices are subject to market fluctuations and applicable brokerage reporting.
-                        Investment values may rise or fall, and past performance does not guarantee future
-                        returns.</strong>
+                <span><strong> Review your cash balance, asset positions and personal information.</strong>
                 </span>
             </div>
 
@@ -402,6 +633,133 @@
                     <p id="profitLossNote">No open positions</p>
                 </article>
             </section>
+
+            <!-- PERSONAL INFORMATION -->
+            <section class="portfolio-panel personal-info-panel">
+
+                <div class="portfolio-panel-head">
+                    <div>
+                        <p class="section-eyebrow">ACCOUNT PROFILE</p>
+                        <h3>Personal Information</h3>
+                        <p>Your registered account information.</p>
+                    </div>
+
+                    <div class="personal-info-actions">
+                        <span class="portfolio-tag">ACCOUNT DETAILS</span>
+
+                        <button type="button" class="btn btn-primary" id="editProfileButton">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Edit Profile
+                        </button>
+                    </div>
+                </div>
+
+                <div class="personal-info-grid">
+
+                    <div class="personal-info-item">
+                        <span><i class="fa-regular fa-user"></i> Full Name</span>
+                        <strong id="profileFullName">Loading...</strong>
+                    </div>
+
+                    <div class="personal-info-item">
+                        <span><i class="fa-regular fa-envelope"></i> Email Address</span>
+                        <strong id="profileEmail">Loading...</strong>
+                    </div>
+
+                    <div class="personal-info-item">
+                        <span><i class="fa-solid fa-phone"></i> Phone Number</span>
+                        <strong id="profilePhone">Not provided</strong>
+                    </div>
+
+                    <div class="personal-info-item">
+                        <span><i class="fa-regular fa-calendar"></i> Date of Birth</span>
+                        <strong id="profileDob">Not provided</strong>
+                    </div>
+
+                    <div class="personal-info-item">
+                        <span><i class="fa-solid fa-fingerprint"></i> Account ID</span>
+                        <strong id="profileAccountId">Loading...</strong>
+                    </div>
+
+                    <div class="personal-info-item">
+                        <span><i class="fa-regular fa-clock"></i> Registration Date</span>
+                        <strong id="profileCreatedAt">Loading...</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- EDIT PROFILE MODAL -->
+            <div class="profile-modal-overlay" id="profileModal" aria-hidden="true">
+
+                <div class="profile-modal">
+
+                    <div class="profile-modal-header">
+                        <div>
+                            <p class="section-eyebrow">ACCOUNT SETTINGS</p>
+                            <h2>Edit Personal Information</h2>
+                            <p>Update your registered personal details.</p>
+                        </div>
+
+                        <button type="button" id="closeProfileModal" class="profile-close">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+
+                    <form id="profileForm">
+
+                        <div class="profile-form-grid">
+
+                            <div class="profile-form-group">
+                                <label for="editFirstName">First Name</label>
+                                <input type="text" id="editFirstName" required>
+                            </div>
+
+                            <div class="profile-form-group">
+                                <label for="editLastName">Last Name</label>
+                                <input type="text" id="editLastName" required>
+                            </div>
+
+                            <div class="profile-form-group">
+                                <label for="editEmail">Email Address</label>
+                                <input type="email" id="editEmail" readonly>
+                                <small>Your login email cannot be changed here.</small>
+                            </div>
+
+                            <div class="profile-form-group">
+                                <label for="editPhone">Phone Number</label>
+                                <input type="tel" id="editPhone" placeholder="Enter your phone number"
+                                    autocomplete="tel">
+                            </div>
+
+                            <div class="profile-form-group">
+                                <label for="editDob">Date of Birth</label>
+                                <input type="date" id="editDob">
+                            </div>
+
+                        </div>
+
+                        <p id="profileFormMessage" class="profile-form-message"></p>
+
+                        <div class="profile-modal-actions">
+
+                            <button type="button" class="btn btn-secondary" id="cancelProfileEdit">
+                                Cancel
+                            </button>
+
+                            <button type="submit" class="btn btn-primary" id="saveProfileButton">
+                                <i class="fa-solid fa-check"></i>
+                                Save Changes
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
 
             <!-- <section class="portfolio-content-grid">
                 <article class="portfolio-panel">
@@ -563,6 +921,309 @@
     <script src="js/app.js"></script>
     <script src="js/dashboard.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            "use strict";
+
+            const profileModal = document.getElementById("profileModal");
+            const editButton = document.getElementById("editProfileButton");
+            const closeButton = document.getElementById("closeProfileModal");
+            const cancelButton = document.getElementById("cancelProfileEdit");
+            const profileForm = document.getElementById("profileForm");
+
+            const firstNameInput = document.getElementById("editFirstName");
+            const lastNameInput = document.getElementById("editLastName");
+            const emailInput = document.getElementById("editEmail");
+            const phoneInput = document.getElementById("editPhone");
+            const dobInput = document.getElementById("editDob");
+
+            const message = document.getElementById("profileFormMessage");
+
+            if (!profileModal || !profileForm || typeof getCurrentUser !== "function") {
+                return;
+            }
+
+            let currentUser = getCurrentUser();
+
+            if (!currentUser) {
+                return;
+            }
+
+
+            // =====================================
+            // DISPLAY PROFILE INFORMATION
+            // =====================================
+
+            function renderProfile(user) {
+
+                const fullName =
+                    `${user.firstName || ""} ${user.lastName || ""}`.trim();
+
+                document.getElementById("profileFullName").textContent =
+                    fullName || "Not provided";
+
+                document.getElementById("profileEmail").textContent =
+                    user.email || "Not provided";
+
+                document.getElementById("profilePhone").textContent =
+                    user.phone || "Not provided";
+
+                document.getElementById("profileDob").textContent =
+                    user.dateOfBirth
+                        ? new Date(user.dateOfBirth + "T00:00:00").toLocaleDateString("en-GB")
+                        : "Not provided";
+
+                document.getElementById("profileAccountId").textContent =
+                    user.id || "Not available";
+
+                document.getElementById("profileCreatedAt").textContent =
+                    user.createdAt
+                        ? new Date(user.createdAt).toLocaleDateString("en-GB", {
+                            day: "2-digit",
+                            month: "long",
+                            year: "numeric"
+                        })
+                        : "Not available";
+
+            }
+
+
+            // =====================================
+            // OPEN PROFILE MODAL
+            // =====================================
+
+            function openProfileModal() {
+
+                currentUser = getCurrentUser();
+
+                if (!currentUser) return;
+
+                firstNameInput.value = currentUser.firstName || "";
+                lastNameInput.value = currentUser.lastName || "";
+                emailInput.value = currentUser.email || "";
+                phoneInput.value = currentUser.phone || "";
+                dobInput.value = currentUser.dateOfBirth || "";
+
+                message.textContent = "";
+
+                profileModal.classList.add("active");
+                profileModal.setAttribute("aria-hidden", "false");
+
+                document.body.classList.add("modal-open");
+
+            }
+
+
+            // =====================================
+            // CLOSE PROFILE MODAL
+            // =====================================
+
+            function closeProfileModal() {
+
+                profileModal.classList.remove("active");
+                profileModal.setAttribute("aria-hidden", "true");
+
+                document.body.classList.remove("modal-open");
+
+            }
+
+
+            // =====================================
+            // OPEN AND CLOSE EVENTS
+            // =====================================
+
+            editButton.addEventListener("click", openProfileModal);
+
+            closeButton.addEventListener("click", closeProfileModal);
+
+            cancelButton.addEventListener("click", closeProfileModal);
+
+            profileModal.addEventListener("click", function (event) {
+
+                if (event.target === profileModal) {
+                    closeProfileModal();
+                }
+
+            });
+
+
+            // =====================================
+            // SAVE PROFILE INFORMATION
+            // =====================================
+
+            profileForm.addEventListener("submit", function (event) {
+
+                event.preventDefault();
+
+                const firstName = firstNameInput.value.trim();
+                const lastName = lastNameInput.value.trim();
+                const phone = phoneInput.value.trim();
+                const dateOfBirth = dobInput.value;
+
+                if (!firstName || !lastName) {
+
+                    message.style.color = "#ff7185";
+                    message.textContent = "Please enter your first and last name.";
+
+                    return;
+
+                }
+
+                if (dateOfBirth) {
+
+                    const selectedDate = new Date(dateOfBirth + "T00:00:00");
+
+                    if (
+                        Number.isNaN(selectedDate.getTime()) ||
+                        selectedDate > new Date()
+                    ) {
+
+                        message.style.color = "#ff7185";
+                        message.textContent = "Please enter a valid date of birth.";
+
+                        return;
+
+                    }
+
+                }
+
+
+                // Retrieve the latest registered users.
+
+                const users = getUsers();
+
+                const userIndex = users.findIndex(function (user) {
+                    return user.id === currentUser.id;
+                });
+
+                if (userIndex === -1) {
+
+                    message.style.color = "#ff7185";
+                    message.textContent = "Unable to locate your account.";
+
+                    return;
+
+                }
+
+
+                // Update only the personal profile fields.
+
+                users[userIndex] = {
+                    ...users[userIndex],
+                    firstName: firstName,
+                    lastName: lastName,
+                    phone: phone,
+                    dateOfBirth: dateOfBirth
+                };
+
+
+                // Save the updated account.
+
+                setStoredJSON(AUTH_STORAGE_KEY, users);
+
+                currentUser = users[userIndex];
+
+
+                // Refresh the visible information.
+
+                renderProfile(currentUser);
+
+
+                // Update the dashboard identity if present.
+
+                const topbarName = document.getElementById("topbarUserName");
+
+                if (topbarName) {
+                    topbarName.textContent = `${firstName} ${lastName}`;
+                }
+
+                const avatar = document.getElementById("userAvatar");
+
+                if (avatar) {
+                    avatar.textContent =
+                        `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+                }
+
+                const welcomeName = document.getElementById("welcomeName");
+
+                if (welcomeName) {
+                    welcomeName.textContent = firstName;
+                }
+
+
+                message.style.color = "#32d6a0";
+                message.textContent = "Your profile has been updated successfully.";
+
+                setTimeout(closeProfileModal, 900);
+
+            });
+
+
+            // =====================================
+            // ESCAPE KEY
+            // =====================================
+
+            document.addEventListener("keydown", function (event) {
+
+                if (event.key === "Escape" && profileModal.classList.contains("active")) {
+                    closeProfileModal();
+                }
+
+            });
+
+
+            // INITIAL PROFILE DISPLAY
+
+            renderProfile(currentUser);
+
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            if (typeof getCurrentUser !== "function") {
+                return;
+            }
+
+            const user = getCurrentUser();
+
+            if (!user) {
+                return;
+            }
+
+            const fullName = `${user.firstName || ""} ${user.lastName || ""}`.trim();
+
+            document.getElementById("profileFullName").textContent =
+                fullName || "Not provided";
+
+            document.getElementById("profileEmail").textContent =
+                user.email || "Not provided";
+
+            document.getElementById("profilePhone").textContent =
+                user.phone || user.phoneNumber || "Not provided";
+
+            document.getElementById("profileDob").textContent =
+                user.dateOfBirth
+                    ? new Date(user.dateOfBirth + "T00:00:00").toLocaleDateString("en-GB")
+                    : "Not provided";
+
+            document.getElementById("profileAccountId").textContent =
+                user.id || "Not available";
+
+            document.getElementById("profileCreatedAt").textContent =
+                user.createdAt
+                    ? new Date(user.createdAt).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric"
+                    })
+                    : "Not available";
+
+        });
+    </script>
+
 
     <!--Start of C.S-->
     <a href="https://wa.me/+19703084124?text=Hello%20I%20would%20like%20I%20to%20speak%20to%20an%20agent"
@@ -586,6 +1247,60 @@
         document.addEventListener("contextmenu", event => event.preventDefault());
     </script> -->
     <!--End of Tawk.to Script-->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuButton = document.getElementById("mobileSidebarToggle");
+            const sidebar = document.querySelector(".sidebar");
+            const overlay = document.getElementById("sidebarOverlay");
+
+            if (!menuButton || !sidebar || !overlay) return;
+
+            function openSidebar() {
+                sidebar.classList.add("mobile-open");
+                overlay.classList.add("active");
+                document.body.classList.add("sidebar-open");
+
+                menuButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                menuButton.setAttribute("aria-expanded", "true");
+                menuButton.setAttribute("aria-label", "Close navigation menu");
+            }
+
+            function closeSidebar() {
+                sidebar.classList.remove("mobile-open");
+                overlay.classList.remove("active");
+                document.body.classList.remove("sidebar-open");
+
+                menuButton.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                menuButton.setAttribute("aria-expanded", "false");
+                menuButton.setAttribute("aria-label", "Open navigation menu");
+            }
+
+            menuButton.addEventListener("click", function () {
+                if (sidebar.classList.contains("mobile-open")) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+
+            overlay.addEventListener("click", closeSidebar);
+
+            sidebar.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", closeSidebar);
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape") closeSidebar();
+            });
+
+            window.addEventListener("resize", function () {
+                if (window.innerWidth > 768) closeSidebar();
+            });
+
+        });
+    </script>
 </body>
 
 </html>
