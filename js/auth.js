@@ -41,14 +41,14 @@ const DEMO_INVESTOR = {
 
         {
             symbol: "XAU",
-            quantity: 540,
+            quantity: 361,
             averagePrice: 1900,
             firstPurchaseDate: "2024-01-26T12:00:00.000Z"
         },
 
         {
             symbol: "MRNA",
-            quantity: 8272.72727273,
+            quantity: 1827.72,
             averagePrice: 45,
             firstPurchaseDate: "2024-02-20T12:00:00.000Z"
         },
@@ -194,7 +194,7 @@ function initializePreconfiguredInvestor(user) {
     const portfolios = getStoredJSON(PORTFOLIO_KEY, {});
     const transactions = getStoredJSON(TRANSACTIONS_KEY, {});
 
-    const DEMO_PORTFOLIO_VERSION = 99;
+    const DEMO_PORTFOLIO_VERSION = 111;
 
     const portfolioVersionKey =
         `nexora_demo_portfolio_version_${user.id}`;
@@ -626,6 +626,13 @@ async function handlePreconfiguredDemoLogin(event) {
 
             setStoredJSON(AUTH_STORAGE_KEY, users);
         }
+
+        // DEFAULT PRECONFIGURED DEMO PROFILE
+        user.phone = "+1 862 431 7641";
+        user.createdAt = "2024-01-15T12:00:00.000Z";
+
+        // Save the updated predefined account
+        setStoredJSON(AUTH_STORAGE_KEY, users);
 
         initializePreconfiguredInvestor(user);
 
