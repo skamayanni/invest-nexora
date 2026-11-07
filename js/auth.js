@@ -27,7 +27,7 @@ const DEMO_INVESTOR = {
     // ACCOUNT BALANCE CONFIGURATION
     // =================================
 
-    cashBalance: 150000,
+    // cashBalance: NEXORA_DEMO_CASH
 
 
 

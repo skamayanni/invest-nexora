@@ -22,7 +22,7 @@ This is an educational demonstration interface.
 const DASHBOARD_PORTFOLIO_KEY = "nexora_portfolios";
 const DASHBOARD_TRANSACTION_KEY = "nexora_transactions";
 
-const NEXORA_DEMO_CASH = 350000;
+const NEXORA_DEMO_CASH = 150000;
 
 const NEXORA_DEMO_SEED_KEY = "nexora_demo_seeded_v1";
 
