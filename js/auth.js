@@ -194,7 +194,7 @@ function initializePreconfiguredInvestor(user) {
     const portfolios = getStoredJSON(PORTFOLIO_KEY, {});
     const transactions = getStoredJSON(TRANSACTIONS_KEY, {});
 
-    const DEMO_PORTFOLIO_VERSION = 444;
+    const DEMO_PORTFOLIO_VERSION = 499;
 
     const portfolioVersionKey =
         `nexora_demo_portfolio_version_${user.id}`;

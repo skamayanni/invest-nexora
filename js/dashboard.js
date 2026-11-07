@@ -906,6 +906,12 @@ function loadDashboardAccount() {
 
     dashboardTransactions = transactions[dashboardUser.id] || [];
 
+    // Always use the code-defined cash balance
+    // for the predefined demonstration account.
+    if (dashboardUser.accountType === "preconfigured-demo") {
+        dashboardPortfolio.cashBalance = NEXORA_DEMO_CASH;
+    }
+
     if (!dashboardPortfolio) {
 
         dashboardPortfolio = {
