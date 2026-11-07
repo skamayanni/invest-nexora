@@ -27,7 +27,7 @@ const DEMO_INVESTOR = {
     // ACCOUNT BALANCE CONFIGURATION
     // =================================
 
-    cashBalance: 800000,
+    cashBalance: 150000,
 
 
 
@@ -41,28 +41,28 @@ const DEMO_INVESTOR = {
 
         {
             symbol: "XAU",
-            quantity: 361,
+            quantity: 150,
             averagePrice: 1900,
             firstPurchaseDate: "2024-01-26T12:00:00.000Z"
         },
 
         {
             symbol: "MRNA",
-            quantity: 1827.72,
+            quantity: 905.72,
             averagePrice: 45,
             firstPurchaseDate: "2024-02-20T12:00:00.000Z"
         },
 
         {
             symbol: "AAPL",
-            quantity: 1000,
+            quantity: 600,
             averagePrice: 180,
             firstPurchaseDate: "2025-03-19T12:00:00.000Z"
         },
 
         {
             symbol: "AMZN",
-            quantity: 1000,
+            quantity: 600,
             averagePrice: 160,
             firstPurchaseDate: "2025-09-02T12:00:00.000Z"
         },
@@ -194,7 +194,7 @@ function initializePreconfiguredInvestor(user) {
     const portfolios = getStoredJSON(PORTFOLIO_KEY, {});
     const transactions = getStoredJSON(TRANSACTIONS_KEY, {});
 
-    const DEMO_PORTFOLIO_VERSION = 111;
+    const DEMO_PORTFOLIO_VERSION = 444;
 
     const portfolioVersionKey =
         `nexora_demo_portfolio_version_${user.id}`;
@@ -285,6 +285,17 @@ const PREDEFINED_DEMO_TRANSACTIONS = [
 
     {
         id: "demo-tx-001",
+        asset: "Bitcoin",
+        symbol: "WITHDRAWAL",
+        type: "SELL",
+        amount: 2000000,
+        date: "2026-11-07",
+        realizedProfit: 510609,
+        description: " "
+    },
+
+    {
+        id: "demo-tx-002",
         asset: "Crude Oil",
         symbol: "WTI",
         type: "BUY",
@@ -294,7 +305,7 @@ const PREDEFINED_DEMO_TRANSACTIONS = [
     },
 
     {
-        id: "demo-tx-002",
+        id: "demo-tx-003",
         asset: "Tesla",
         symbol: "TSLA",
         type: "BUY",
@@ -304,25 +315,14 @@ const PREDEFINED_DEMO_TRANSACTIONS = [
     },
 
     {
-        id: "demo-tx-003",
+        id: "demo-tx-004",
         asset: "Moderna",
         symbol: "MRNA",
         type: "BUY",
         amount: 45000,
         date: "2024-02-20",
         description: "Stock purchase"
-    },
-
-    {
-        id: "demo-tx-004",
-        asset: "Bitcoin",
-        symbol: "WITHDRAWAL",
-        type: "SELL",
-        amount: 150000,
-        date: "2024-11-29",
-        realizedProfit: 208460,
-        description: " "
-    },
+    },  
 
     {
         id: "demo-tx-005",
