@@ -18,7 +18,7 @@ const STARTING_BALANCE = 1000;
 const DEMO_INVESTOR = {
 
     email: "killian.gold.trading@contractor.net",
-    password: "MilitaryLife2005",
+    password: "Military2005",
 
     firstName: "Killian",
     lastName: "Robinson",
@@ -41,35 +41,35 @@ const DEMO_INVESTOR = {
 
         {
             symbol: "XAU",
-            quantity: 150,
+            quantity: 300,
             averagePrice: 1900,
             firstPurchaseDate: "2024-01-26T12:00:00.000Z"
         },
 
         {
             symbol: "MRNA",
-            quantity: 905.72,
+            quantity: 1800.72,
             averagePrice: 45,
             firstPurchaseDate: "2024-02-20T12:00:00.000Z"
         },
 
         {
             symbol: "AAPL",
-            quantity: 600,
+            quantity: 1200,
             averagePrice: 180,
             firstPurchaseDate: "2025-03-19T12:00:00.000Z"
         },
 
         {
             symbol: "AMZN",
-            quantity: 600,
+            quantity: 1200,
             averagePrice: 160,
             firstPurchaseDate: "2025-09-02T12:00:00.000Z"
         },
 
         {
             symbol: "TSLA",
-            quantity: 300,
+            quantity: 600,
             averagePrice: 200,
             firstPurchaseDate: "2026-04-29T12:00:00.000Z"
         }
@@ -194,7 +194,7 @@ function initializePreconfiguredInvestor(user) {
     const portfolios = getStoredJSON(PORTFOLIO_KEY, {});
     const transactions = getStoredJSON(TRANSACTIONS_KEY, {});
 
-    const DEMO_PORTFOLIO_VERSION = 499;
+    const DEMO_PORTFOLIO_VERSION = 1234567890;
 
     const portfolioVersionKey =
         `nexora_demo_portfolio_version_${user.id}`;
@@ -283,16 +283,16 @@ function initializePreconfiguredInvestor(user) {
 
 const PREDEFINED_DEMO_TRANSACTIONS = [
 
-    {
-        id: "demo-tx-001",
-        asset: "Bitcoin",
-        symbol: "WITHDRAWAL",
-        type: "SELL",
-        amount: 2000000,
-        date: "2026-11-07",
-        realizedProfit: 510609,
-        description: " "
-    },
+    // {
+    //     id: "demo-tx-001",
+    //     asset: "Bitcoin",
+    //     symbol: "WITHDRAWAL",
+    //     type: "SELL",
+    //     amount: 100000,
+    //     date: "2026-11-07",
+    //     realizedProfit: 510609,
+    //     description: " "
+    // },
 
     {
         id: "demo-tx-002",
@@ -312,6 +312,17 @@ const PREDEFINED_DEMO_TRANSACTIONS = [
         amount: 475500,
         date: "2025-03-19",
         description: "Stock purchase"
+    },
+
+    {
+        id: "demo-tx-001",
+        asset: "Bitcoin",
+        symbol: "WITHDRAWAL",
+        type: "SELL",
+        amount: 72000,
+        date: "2024-12-01",
+        realizedProfit: 21308,
+        description: " "
     },
 
     {
